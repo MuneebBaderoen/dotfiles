@@ -17,7 +17,7 @@ set -e fish_user_abbreviations
 # Misc abbreviations ------------------------------------
 abbr c z
 abbr v nvim
-abbr stt subl .
+abbr stt open -a Sublime\\ Text .
 abbr r source ~/.config/fish/config.fish
 
 # Git abbreviations ------------------------------------
