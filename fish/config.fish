@@ -5,7 +5,6 @@ set -x EDITOR nvim
 # Set android path for gradle build
 set -x ANDROID_HOME /usr/local/share/android-sdk
 set -x ANDROID_SDK_ROOT /usr/local/share/android-sdk
-set -x PIP_REQUIRE_VIRTUALENV false
 
 # Pipe my public key to my clipboard.
 alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
@@ -16,7 +15,6 @@ set -e fish_user_abbreviations
 
 # Misc abbreviations ------------------------------------
 abbr c z
-abbr v nvim
 abbr stt open -a Sublime\\ Text .
 abbr r source ~/.config/fish/config.fish
 
@@ -71,11 +69,19 @@ function make_completion --argument-names alias command
     complete -c $alias -a "(__alias_completion_$alias)"
 end
 
-make_completion v 'nvim'
+# open new vimr instances on launch
+# set cwd to current directory
+function v
+    vimr -s --cwd .
+end
 
 # rbenv
 function rb
 	status --is-interactive; and . (rbenv init -|psub)
+end
+
+function node
+    nvm use 7.0.0
 end
 
 # nvm
@@ -85,7 +91,7 @@ end
 # nvm > /dev/null
 
 # python virtual environment
-set -x PIP_REQUIRE_VIRTUALENV true
+set -x PIP_REQUIRE_VIRTUALENV false
 function py
     status --is-interactive; and . (pyenv init -|psub)
     status --is-interactive; and . (pyenv virtualenv-init -|psub)
@@ -96,3 +102,4 @@ end
 if test $TERM != "screen-256color"
     command tmux attach-session -t 'default'; or command tmux new-session -s 'default'
 end
+

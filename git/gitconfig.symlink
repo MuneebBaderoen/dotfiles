@@ -41,3 +41,4 @@
 	trustExitCode = true
 [core]
 	excludesfile = /Users/muneeb/.gitignore
+	autocrlf = input

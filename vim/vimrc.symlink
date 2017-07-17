@@ -1,4 +1,4 @@
-let mapleader = "\<Space>"
+let mapleader = ","
 " ===========================================================================================================
 " Plugins
 " ===========================================================================================================
@@ -36,16 +36,22 @@ Plug 'vim-airline/vim-airline' "{{{
 Plug 'vim-airline/vim-airline-themes'
 
 " File browsing
-Plug 'scrooloose/nerdtree', "{{{
-    noremap <leader>kl :NERDTreeFind<cr>
-    noremap <leader>kk :NERDTreeToggle<cr>
+Plug 'scrooloose/nerdtree' "{{{
+    noremap <leader>l :NERDTreeFind<cr>
+    noremap <leader>k :NERDTreeToggle<cr>
     let NERDTreeChDirMode=1
     let NERDTreeHighlightCursorline=1
     let NERDTreeMapActivateNode='<space>'
     let NERDTreeMinimalUI=1
     let NERDTreeShowHidden=1
 " }}}
+Plug 'tyok/nerdtree-ack'
 Plug 'ctrlpvim/ctrlp.vim' "{{{
+    if has("gui_vimr")
+        " VIMR allows binding to cmd"
+        nnoremap <D-p> :CtrlP<cr>
+    endif
+
     let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 
     " close prompt on backspace or <c-h>
@@ -56,14 +62,29 @@ Plug 'ctrlpvim/ctrlp.vim' "{{{
         \ }
 " }}}
 Plug 'mileszs/ack.vim'
+if executable('ag')
+    " Use ag over grep
+    let g:ackprg = 'ag --nogroup --nocolor --vimgrep --smart-case'
+endif
 
 " Tmux pane interaction
-Plug 'christoomey/vim-tmux-navigator'
+Plug 'christoomey/vim-tmux-navigator',
+    let g:tmux_navigator_no_mappings = 1
+    let g:tmux_navigator_disable_when_zoomed = 1
+
+    nnoremap <silent> <C-j> :TmuxNavigateLeft<cr>
+    nnoremap <silent> <C-k> :TmuxNavigateDown<cr>
+    nnoremap <silent> <C-l> :TmuxNavigateUp<cr>
+    nnoremap <silent> <C-h> :TmuxNavigateRight<cr>
+    nnoremap <silent> <C-;> :TmuxNavigateRight<cr>
+
 Plug 'tmux-plugins/vim-tmux'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 
 "Code level utilities
-Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter' " {{{
+    let g:gitgutter_eager = 0
+"}}}
 Plug 'ervandew/supertab'
 Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips' "{{{
@@ -98,9 +119,11 @@ Plug 'tpope/vim-commentary' "{{{
         nnoremap <D-/> :Commentary<cr>
         vnoremap <D-/> :Commentary<cr>
     else 
-        " Terminal keybinding, iterm sends ctrl-s for cmd-s
-        nnoremap <C-/> :Commentary<cr>
-        vnoremap <C-/> :Commentary<cr>
+        " Terminal keybinding
+        " ctrl-/ is for some reason being sent as ctrl-_
+        " got the keybinding from just pressing the combo in insert mode
+        nnoremap  :Commentary<cr>
+        vnoremap  :Commentary<cr>
     endif
 " }}}
 
@@ -117,7 +140,8 @@ Plug 'ternjs/tern_for_vim', {'do': 'npm install'} "{{{
 " }}}
 Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx']  }
 
-
+" Shell utilities
+Plug 'dag/vim-fish'
 
 call plug#end()
 " }}}
@@ -132,7 +156,7 @@ au FocusLost,WinLeave * :silent! wa
 " Trigger autoread when changing buffers or coming back to vim.
 au FocusGained,BufEnter * :silent! !
 
-set lazyredraw
+" set lazyredraw
 set nobackup
 set noswapfile
 set autoread                    " automatically reload files changed outside of Vim
@@ -197,6 +221,14 @@ nnoremap <leader>vs :source $MYVIMRC<cr>
 " Clear the highlighted search results
 nnoremap <leader>/ :nohlsearch<cr>
 
+" Split vertically or horizontally using tmux bindings
+" Some co-op between vim and tmux bindings is necessary to get this working
+if has("gui_vimr")
+    nnoremap <C-a>- :split<cr>
+    nnoremap <C-a>\ :vsplit<cr>
+    nnoremap <C-a>x :close<cr>
+endif
+
 " Move hjkl navigation to touch type rest position
 noremap j h
 noremap k j
@@ -205,10 +237,10 @@ noremap ; l
 noremap h ;
 
 "Switch between panels left and right.
-nnoremap <leader>j <C-w>h
-nnoremap <leader>; <C-w>l
-nnoremap <leader>k <C-w>j
-nnoremap <leader>l <C-w>k
+" nnoremap <C-j> <C-w>h
+" nnoremap <C-;> <C-w>l
+" nnoremap <C-k> <C-w>j
+" nnoremap <C-l> <C-w>k
 
 " enables magic mode in regular expressions
 " :help /magic
@@ -249,7 +281,4 @@ nnoremap n nzz
 nnoremap N Nzz
 " }}}
 
-if executable('ag')
-    " Use ag over grep
-    let g:ackprg = 'ag --nogroup --nocolor --vimgrep --smart-case'
-endif
+
