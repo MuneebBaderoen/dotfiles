@@ -5,6 +5,7 @@ set -x EDITOR nvim
 # Set android path for gradle build
 set -x ANDROID_HOME /usr/local/share/android-sdk
 set -x ANDROID_SDK_ROOT /usr/local/share/android-sdk
+set -x ANDROID_NDK_HOME /usr/local/share/android-ndk
 
 # Pipe my public key to my clipboard.
 alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"

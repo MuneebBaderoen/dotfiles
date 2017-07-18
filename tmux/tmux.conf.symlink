@@ -118,6 +118,7 @@ bind-key -T copy-mode-vi C-h select-pane -R
 bind - if-shell "$is_vim" "send-keys :split Enter" "split-window -v -c '#{pane_current_path}'"
 bind \ if-shell "$is_vim" "send-keys :vsplit Enter" "split-window -h -c '#{pane_current_path}'"
 bind x if-shell "$is_vim" "send-keys :q Enter" "kill-pane"
+bind X if-shell "$is_vim" "send-keys :q Enter" "kill-pane"
 # Use shift to force tmux split instead
 bind | split-window -h -c '#{pane_current_path}'
 bind _ split-window -v -c '#{pane_current_path}'

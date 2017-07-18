@@ -39,6 +39,14 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/nerdtree' "{{{
     noremap <leader>l :NERDTreeFind<cr>
     noremap <leader>k :NERDTreeToggle<cr>
+    if has("gui_vimr")
+        " VIMR allows binding to cmd"
+        noremap <D-k><D-b> :NERDTreeToggle<cr>
+    else
+        noremap <C-k><C-b> :NERDTreeToggle<cr>
+    endif
+
+
     let NERDTreeChDirMode=1
     let NERDTreeHighlightCursorline=1
     let NERDTreeMapActivateNode='<space>'
@@ -189,6 +197,7 @@ set number                      " Enable current line number
 
 set splitright                  " Create new vertical splits on the right hand side
 set splitbelow                  " Create new horizontal splits below
+set diffopt+=vertical            " Open diff splits vertically rather than horizontal default
 
 " set syntax colour scheme to monokai
 colorscheme molokai
@@ -269,6 +278,9 @@ else
     inoremap <C-s> <Esc>:w<cr>
 endif
 
+" Search on cmd-f
+nnoremap <D-f> /\v
+
 " Let escape leave terminal buffer
 " Returns to normal mode, making all vim keybindings come back to life
 " neovim only
@@ -281,4 +293,52 @@ nnoremap n nzz
 nnoremap N Nzz
 " }}}
 
+" Utility functions for managing tabs
+" Seriously awesome stuff
+function! MoveToPrevTab()
+  "there is only one window
+  if tabpagenr('$') == 1 && winnr('$') == 1
+    return
+  endif
+  "preparing new window
+  let l:tab_nr = tabpagenr('$')
+  let l:cur_buf = bufnr('%')
+  if tabpagenr() != 1
+    close!
+    if l:tab_nr == tabpagenr('$')
+      tabprev
+    endif
+    sp
+  else
+    close!
+    exe "0tabnew"
+  endif
+  "opening current buffer in new window
+  exe "b".l:cur_buf
+endfunc
+
+function! MoveToNextTab()
+  "there is only one window
+  if tabpagenr('$') == 1 && winnr('$') == 1
+    return
+  endif
+  "preparing new window
+  let l:tab_nr = tabpagenr('$')
+  let l:cur_buf = bufnr('%')
+  if tabpagenr() < tab_nr
+    close!
+    if l:tab_nr == tabpagenr('$')
+      tabnext
+    endif
+    sp
+  else
+    close!
+    tabnew
+  endif
+  "opening current buffer in new window
+  exe "b".l:cur_buf
+endfunc
+
+nnoremap <D-Left> :call MoveToPrevTab()<cr>
+nnoremap <D-Right> :call MoveToNextTab()<cr>
 
