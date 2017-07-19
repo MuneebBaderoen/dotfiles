@@ -18,7 +18,11 @@ Plug 'neomake/neomake' "{{{
     autocmd! BufWritePost * Neomake
     let g:neomake_javascript_enabled_makers = ['eslint']
 " }}}
-Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive', "{{{
+    nnoremap gb :Gblame<cr>
+    nnoremap gs :Gstatus<cr>
+    nnoremap gd :Gdiff<cr>
+" }}}
 
 "Visual utilities
 Plug 'vim-airline/vim-airline' "{{{
@@ -197,7 +201,7 @@ set number                      " Enable current line number
 
 set splitright                  " Create new vertical splits on the right hand side
 set splitbelow                  " Create new horizontal splits below
-set diffopt+=vertical            " Open diff splits vertically rather than horizontal default
+set diffopt+=vertical           " Open diff splits vertically rather than horizontal default
 
 " set syntax colour scheme to monokai
 colorscheme molokai
@@ -245,16 +249,13 @@ noremap l k
 noremap ; l
 noremap h ;
 
-"Switch between panels left and right.
-" nnoremap <C-j> <C-w>h
-" nnoremap <C-;> <C-w>l
-" nnoremap <C-k> <C-w>j
-" nnoremap <C-l> <C-w>k
-
 " enables magic mode in regular expressions
 " :help /magic
 nnoremap / /\v
 vnoremap / /\v
+" Search on cmd-f
+nnoremap <D-f> /\v
+
 
 " Jump 5 lines at a time. useful for keyboard scrolling the cursor.
 noremap <S-k> 5j
@@ -278,9 +279,6 @@ else
     inoremap <C-s> <Esc>:w<cr>
 endif
 
-" Search on cmd-f
-nnoremap <D-f> /\v
-
 " Let escape leave terminal buffer
 " Returns to normal mode, making all vim keybindings come back to life
 " neovim only
@@ -288,7 +286,7 @@ if(has('nvim'))
     tnoremap <Esc> <C-\><C-n>
 endif
 
-" Scroll screen so tht cursor is in the center after searches
+" Scroll screen so that cursor is in the center after searches
 nnoremap n nzz
 nnoremap N Nzz
 " }}}
