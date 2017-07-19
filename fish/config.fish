@@ -96,7 +96,6 @@ set -x PIP_REQUIRE_VIRTUALENV false
 function py
     status --is-interactive; and . (pyenv init -|psub)
     status --is-interactive; and . (pyenv virtualenv-init -|psub)
-    pyenv activate py
 end
 
 # launch tmux automatically
