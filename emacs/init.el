@@ -18,37 +18,47 @@
 (me/load "./setup_evil_mode.el")
 (me/load "./setup_powerline.el")
 
+(setq use-package-always-ensure t)
 ;; Personal package list
 ;; Associated package initialization is grouped with package
-(use-package try
-  :ensure t)
+(use-package try)
 
 (use-package linum-relative
-  :ensure t
   :init (setq linum-relative-current-symbol "")
   :config
-  (progn
-    (global-linum-mode t)
-    (linum-relative-mode t)))
+  (global-linum-mode t)
+  (linum-relative-mode t))
 
 (use-package darkokai-theme
-  :ensure t
   :config (load-theme 'darkokai t))
 
 (use-package company
-  :ensure t)
+  :config
+  (company-mode)
+  (add-hook 'after-init-hook 'global-company-mode))
 
 (use-package projectile
-  :ensure t
   :config (projectile-mode))
 
 (use-package undo-tree
-  :ensure t
   :init (global-undo-tree-mode))
 
-(use-package yasnippet
-  :ensure t)
+(use-package yasnippet)
 
+(use-package which-key
+  :config (which-key-mode))
+
+(use-package zoom-window)
+
+(use-package neotree
+  :config (setq neo-theme (if (display-graphic-p) 'icons 'arrow)))
+(use-package all-the-icons)
+
+(all-the-icons-insert-icons-for 'alltheicon)
+
+
+(use-package helm
+  :config (global-set-key (kbd "M-x") 'helm-M-x))
 ;(desktop-save-mode 1)
 ;(savehist-mode 1)
 ;(add-to-list 'savehist-additional-variables 'kill-ring)

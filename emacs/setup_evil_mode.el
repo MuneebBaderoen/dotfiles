@@ -55,10 +55,6 @@
   (define-key evil-visual-state-map (kbd "M-j") 'me/move-region-up)
   (define-key evil-visual-state-map (kbd "M-k") 'me/move-region-down))
 
-;; Move lines/regions up or down
-;; (global-set-key (kbd "M-j") 'me/move-text-down)
-;; (global-set-key (kbd "M-k") 'me/move-text-up)
-
 ;; Save and exit normal mode on cmd-s
 (global-set-key
  (kbd "s-s")
