@@ -9,18 +9,6 @@
 (use-package evil-nerd-commenter
   :ensure t)
 
-(evil-define-motion me/evil-jump-5-lines-up(count)
-  "Move the cursor COUNT screen lines down, or 5."
-  :type exclusive
-  (let ((line-move-visual t))
-    (evil-line-move (- (or count 5)))))
-
-(evil-define-motion me/evil-jump-5-lines-down (count)
-  "Move the cursor COUNT screen lines down, or 5."
-  :type exclusive
-  (let ((line-move-visual t))
-    (evil-line-move (or count 5))))
-
 (defun me/move-line-up ()
   "Move a single line up"
   (transpose-lines 1)
@@ -56,10 +44,10 @@
 
 (with-eval-after-load 'evil-maps
   ;; Multiple line jumps up or down
-  (define-key evil-normal-state-map (kbd "J") 'me/evil-jump-5-lines-down)
-  (define-key evil-normal-state-map (kbd "K") 'me/evil-jump-5-lines-up)
-  (define-key evil-visual-state-map (kbd "J") 'me/evil-jump-5-lines-down)
-  (define-key evil-visual-state-map (kbd "K") 'me/evil-jump-5-lines-up)
+  (define-key evil-normal-state-map (kbd "J") "5j")
+  (define-key evil-normal-state-map (kbd "K") "5k")
+  (define-key evil-visual-state-map (kbd "J") "5j")
+  (define-key evil-visual-state-map (kbd "K") "5k")
   ;; Move individual lines up or down
   (define-key evil-normal-state-map (kbd "M-j") 'me/move-line-down)
   (define-key evil-normal-state-map (kbd "M-k") 'me/move-line-up)
