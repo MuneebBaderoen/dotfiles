@@ -37,11 +37,15 @@ brew 'openssl'
 cask 'firefox'
 cask 'google-chrome'
 cask 'slack'
+cask 'haskell-platform'
 cask 'sourcetree'
 cask 'sublime-text'
 cask 'visual-studio-code'
 # cask 'steam'
 # cask 'teamspeak-client'
+
+# Environment switching
+brew direnv
 
 # virtualization
 cask 'docker'
