@@ -84,14 +84,8 @@
           (accent . (telephone-line-major-mode-segment))
           (evil   . (telephone-line-airline-position-segment))))
 
-  ;; (setq telephone-line-primary-right-separator 'telephone-line-abs-left
-  ;; 	telephone-line-secondary-right-separator 'telephone-line-abs-hollow-left)
-
   (telephone-line-mode t))
 
 (use-package telephone-line
   :config
   (telephone-line-evil-config))
-;(desktop-save-mode 1)
-;(savehist-mode 1)
-;(add-to-list 'savehist-additional-variables 'kill-ring)
