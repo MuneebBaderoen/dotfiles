@@ -4,7 +4,7 @@
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
-(package-initialize)
+;; (package-initialize)
 
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file 'noerror)
@@ -18,6 +18,8 @@
 (me/load "./setup_evil_mode.el")
 (me/load "./setup_powerline.el")
 
+(setq initial-scratch-message "Welcome")
+
 (setq use-package-always-ensure t)
 ;; Personal package list
 ;; Associated package initialization is grouped with package
@@ -29,8 +31,11 @@
   (global-linum-mode t)
   (linum-relative-mode t))
 
-(use-package darkokai-theme
-  :config (load-theme 'darkokai t))
+(use-package doom-themes
+  :config
+  (load-theme 'doom-one t)
+  (doom-themes-neotree-config) 
+  (doom-themes-visual-bell-config))
 
 (use-package company
   :config
@@ -56,9 +61,37 @@
 
 (all-the-icons-insert-icons-for 'alltheicon)
 
+(use-package smooth-scroll
+  :config
+  (smooth-scroll-mode 1)
+  (setq smooth-scroll/vscroll-step-size 5))
 
 (use-package helm
   :config (global-set-key (kbd "M-x") 'helm-M-x))
+
+(defun telephone-line-evil-config ()
+  "A simple default for using telephone-line with evil."
+  (setq telephone-line-lhs
+        '((evil   . (telephone-line-evil-tag-segment))
+          (accent . (telephone-line-vc-segment
+                     telephone-line-erc-modified-channels-segment
+                     telephone-line-process-segment))
+          (nil    . (telephone-line-minor-mode-segment
+                     telephone-line-buffer-segment))))
+
+  (setq telephone-line-rhs
+        '((nil    . (telephone-line-misc-info-segment))
+          (accent . (telephone-line-major-mode-segment))
+          (evil   . (telephone-line-airline-position-segment))))
+
+  ;; (setq telephone-line-primary-right-separator 'telephone-line-abs-left
+  ;; 	telephone-line-secondary-right-separator 'telephone-line-abs-hollow-left)
+
+  (telephone-line-mode t))
+
+(use-package telephone-line
+  :config
+  (telephone-line-evil-config))
 ;(desktop-save-mode 1)
 ;(savehist-mode 1)
 ;(add-to-list 'savehist-additional-variables 'kill-ring)

@@ -11,3 +11,8 @@
 (tool-bar-mode -1) 
 (toggle-scroll-bar -1)
 (fset 'yes-or-no-p 'y-or-n-p)
+(setq ring-bell-function 'ignore)
+
+
+(show-paren-mode t)
+(setq show-paren-style 'expression)

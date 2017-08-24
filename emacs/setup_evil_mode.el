@@ -3,8 +3,8 @@
   :init (setq evil-want-C-u-scroll t) 
   :config (evil-mode 1))
 
-(use-package evil-leader
-  :ensure t)
+; (use-package evil-leader
+;   :ensure t)
 
 (use-package evil-nerd-commenter
   :ensure t)
