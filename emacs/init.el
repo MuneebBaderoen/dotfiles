@@ -25,67 +25,67 @@
 ;; Associated package initialization is grouped with package
 (use-package try)
 
-(use-package linum-relative
-  :init (setq linum-relative-current-symbol "")
-  :config
-  (global-linum-mode t)
-  (linum-relative-mode t))
+; (use-package linum-relative
+;   :init (setq linum-relative-current-symbol "")
+;   :config
+;   (global-linum-mode t)
+;   (linum-relative-mode t))
 
-(use-package doom-themes
-  :config
-  (load-theme 'doom-one t)
-  (doom-themes-neotree-config) 
-  (doom-themes-visual-bell-config))
+; (use-package doom-themes
+;   :config
+;   (load-theme 'doom-one t)
+;   (doom-themes-neotree-config) 
+;   (doom-themes-visual-bell-config))
 
-(use-package company
-  :config
-  (company-mode)
-  (add-hook 'after-init-hook 'global-company-mode))
+; (use-package company
+;   :config
+;   (company-mode)
+;   (add-hook 'after-init-hook 'global-company-mode))
 
-(use-package projectile
-  :config (projectile-mode))
+; (use-package projectile
+;   :config (projectile-mode))
 
-(use-package undo-tree
-  :init (global-undo-tree-mode))
+; (use-package undo-tree
+;   :init (global-undo-tree-mode))
 
-(use-package yasnippet)
+; (use-package yasnippet)
 
-(use-package which-key
-  :config (which-key-mode))
+; (use-package which-key
+;   :config (which-key-mode))
 
-(use-package zoom-window)
+; (use-package zoom-window)
 
-(use-package neotree
-  :config (setq neo-theme (if (display-graphic-p) 'icons 'arrow)))
-(use-package all-the-icons)
+; (use-package neotree
+;   :config (setq neo-theme (if (display-graphic-p) 'icons 'arrow)))
+; (use-package all-the-icons)
 
-(all-the-icons-insert-icons-for 'alltheicon)
+; (all-the-icons-insert-icons-for 'alltheicon)
 
-(use-package smooth-scroll
-  :config
-  (smooth-scroll-mode 1)
-  (setq smooth-scroll/vscroll-step-size 5))
+; (use-package smooth-scroll
+;   :config
+;   (smooth-scroll-mode 1)
+;   (setq smooth-scroll/vscroll-step-size 5))
 
-(use-package helm
-  :config (global-set-key (kbd "M-x") 'helm-M-x))
+; (use-package helm
+;   :config (global-set-key (kbd "M-x") 'helm-M-x))
 
-(defun telephone-line-evil-config ()
-  "A simple default for using telephone-line with evil."
-  (setq telephone-line-lhs
-        '((evil   . (telephone-line-evil-tag-segment))
-          (accent . (telephone-line-vc-segment
-                     telephone-line-erc-modified-channels-segment
-                     telephone-line-process-segment))
-          (nil    . (telephone-line-minor-mode-segment
-                     telephone-line-buffer-segment))))
+; (defun telephone-line-evil-config ()
+;   "A simple default for using telephone-line with evil."
+;   (setq telephone-line-lhs
+;         '((evil   . (telephone-line-evil-tag-segment))
+;           (accent . (telephone-line-vc-segment
+;                      telephone-line-erc-modified-channels-segment
+;                      telephone-line-process-segment))
+;           (nil    . (telephone-line-minor-mode-segment
+;                      telephone-line-buffer-segment))))
 
-  (setq telephone-line-rhs
-        '((nil    . (telephone-line-misc-info-segment))
-          (accent . (telephone-line-major-mode-segment))
-          (evil   . (telephone-line-airline-position-segment))))
+;   (setq telephone-line-rhs
+;         '((nil    . (telephone-line-misc-info-segment))
+;           (accent . (telephone-line-major-mode-segment))
+;           (evil   . (telephone-line-airline-position-segment))))
 
-  (telephone-line-mode t))
+;   (telephone-line-mode t))
 
-(use-package telephone-line
-  :config
-  (telephone-line-evil-config))
+; (use-package telephone-line
+;   :config
+;   (telephone-line-evil-config))
