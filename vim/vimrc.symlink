@@ -62,6 +62,7 @@ Plug 'ctrlpvim/ctrlp.vim' "{{{
     if has("gui_vimr")
         " VIMR allows binding to cmd"
         nnoremap <D-p> :CtrlP<cr>
+        nnoremap <D-b> :CtrlPBuffer<cr>
     endif
 
     let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
@@ -262,8 +263,10 @@ noremap <S-k> 5j
 noremap <S-l> 5k
 
 " Tab controls. Awesomeness engaged.
-nnoremap <left> :tabprevious<cr>
-nnoremap <right> :tabnext<cr>
+nnoremap <C-a><C-p> :tabprevious<cr>
+nnoremap <C-a>p :tabprevious<cr>
+nnoremap <C-a><C-n> :tabnext<cr>
+nnoremap <C-a>n :tabnext<cr>
 
 " General ease of use
 " Save on cmd-s. 

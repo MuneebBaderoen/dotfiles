@@ -13,6 +13,11 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq ring-bell-function 'ignore)
 
-
+; Highlight the current expression
 (show-paren-mode t)
 (setq show-paren-style 'expression)
+
+; Autosave every 500 typed characters
+(setq auto-save-interval 500)
+; Scroll just one line when hitting bottom of window
+;; (setq scroll-conservatively 10000)
